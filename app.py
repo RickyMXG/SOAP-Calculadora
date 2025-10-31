@@ -7,7 +7,6 @@ class Calculadora(ServiceBase):
     def Sumar(ctx, a, b):
         return a + b
 
-# Application (contrato SOAP)
 application = Application(
     [Calculadora],
     tns='urn:calculadora',
@@ -15,12 +14,11 @@ application = Application(
     out_protocol=Soap11()
 )
 
-# WSGI app que sirve SOAP + ?wsdl
+# WSGI app para gunicorn
 app = WsgiApplication(application)
 
-# Soporte para ejecución local opcional (no requerido por Render)
 if __name__ == "__main__":
     from wsgiref.simple_server import make_server
     server = make_server("0.0.0.0", 8000, app)
-    print("Local: http://127.0.0.1:8000  (WSDL en /?wsdl)")
+    print("Local en http://127.0.0.1:8000 (WSDL en /?wsdl)")
     server.serve_forever()
