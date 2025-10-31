@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: soap-calculadora
+    env: docker
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /?wsdl
+    dockerfilePath: ./Dockerfile
